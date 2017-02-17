@@ -10,7 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Solution {
 	private ReentrantLock rl1 = new ReentrantLock();
 	private ReentrantLock rl2 = new ReentrantLock();
-	private Auto
 
 	private int breads = 1;
 
