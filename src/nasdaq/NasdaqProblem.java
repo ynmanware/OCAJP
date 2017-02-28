@@ -34,28 +34,37 @@ public class NasdaqProblem {
 	 * @return
 	 */
 	private static long solution(int n, int c) {
-		BigInteger sum = new BigInteger("0");
-		BigInteger product = new BigInteger("1");
+
+		if (n < 0 || c < 0) {
+			throw new IllegalArgumentException();
+		}
+
+		BigInteger sum = BigInteger.valueOf(0);
+		BigInteger product = BigInteger.valueOf(1);
+
 		for (int i = 1; i < n; i++) {
 			if (i > c) {
 				// Knuth algo O(n^2)
-				product = product.divide(java.math.BigInteger.valueOf(i - c));
+				product = product.divide(BigInteger.valueOf(i - c));
 			}
+			
 			// between Toom-Cook Multiplication - O(n^1.465) to Karatsuba Multiplication - O(n^1.585)
-			product = product.multiply(java.math.BigInteger.valueOf(i));
+			product = product.multiply(BigInteger.valueOf(i));
 
 			sum = sum.add(product);
 		}
 
 		String resultStr = sum.toString();
+
 		if (resultStr.length() > 10) {
-			resultStr = sum.toString().substring(0, 10);
+			resultStr = resultStr.substring(0, 10);
 		}
 
 		Long r = Long.valueOf(resultStr);
 
-		System.out.format("for n: %d and c: %d, Result = %d", n, c, r);
+		System.out.format("For n: %d and c: %d, Result is %d", n, c, r);
 		System.out.println();
+
 		return r;
 	}
 
